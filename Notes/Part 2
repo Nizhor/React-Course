@@ -1,0 +1,183 @@
+- A - Collections rendering and models
+    
+    Console Logging:
+    
+    - Experienced JavaScript programmers use console.log more frequently than beginners.
+    - The advice given is to always log or debug instead of making assumptions when something doesn't work.
+    - It suggests using commas instead of concatenating with a plus sign when trying to display a message with an object in console.log, to see the object content in the developer console.
+    
+    Event Processing:
+    
+    - Handling events in JavaScript, especially for beginners, can be challenging.
+    - There's a recommendation to revisit the section on event processing if you're unsure about the topic.
+    
+    Visual Studio Code Snippets:
+    
+    - You can create shortcuts in Visual Studio Code for commonly used code fragments.
+    - For instance, one can set up a shortcut, clog, to quickly print messages to the console.
+    
+    Using Tables in JavaScript:
+    
+    - Going forward, JavaScript table functional processing methods like find, filter, and map will be frequently used.
+    - The principles in these methods are the same as in Java 8 streams or Python advanced programming.
+    
+    Rendering Collections:
+    
+    - Demonstrates how to use React to display a list of notes.
+    - Hard-coding individual list items isn't efficient, so the map function is introduced to generate the list items dynamically.
+    
+    Key Attribute:
+    
+    - React needs a unique key for elements in a list to efficiently update the view.
+    - An error will show up if keys aren't provided.
+    - It's highlighted that table indexes shouldn't be used as keys because they can cause problems.
+    
+    Map:
+    
+    - The map method is essential for understanding how to process arrays in JavaScript.
+    - The function of map is to transform every element in an array using a provided function and return a new array.
+    
+    Refactoring and Modules:
+    
+    - The code is refactored to separate concerns and improve readability.
+    - The concept of ES6 modules is introduced. Components can be separated into their modules, making the codebase more organized.
+    
+    Error Handling:
+    
+    - Errors can occur often, especially with dynamically typed languages like JavaScript.
+    - Using console.log is a good way to identify the cause of errors.
+- B - Processing of for[ms](https://fullstackopen.com/osa2/lomakkeiden_kasittely)
+    - State for Notes:
+        - Use useState to store notes.
+        Initialize with props.
+    - Adding Notes:
+        - Create a form for input.
+        - Handle submission with addNote.
+        - Use event.preventDefault() to stop default behavior.
+    - Controlled Components:
+        - Bind input value to newNote state.
+        - Sync input with state using handleNoteChange.
+    - Filtering Notes:
+        - Use showAll state to toggle note display.
+        - Filter important notes with JavaScript's filter.
+    - Toggle Button:
+        - Add button to switch note views.
+        - Update showAll state on click.
+        - Dynamic button text based on showAll state.
+- C Retrieving the data on the server
+    - Package.json
+        - Purpose: Defines the project's dependencies (external libraries).
+        - Installation of Axios:
+            - Preferred method: Command line (npm install axios).
+            - Always run npm commands in the root directory (where package.json exists).
+        - Dependencies after installation:
+            - Added Axios among other dependencies.
+        - Additional installation for application development:
+            - JSON Server: npm install json-server --save-dev.
+            - Small addition made to the Scripts section of package.json.
+        - Starting the JSON Server:
+            - Use the command npm run server.
+        - Important note:
+            - If a JSON Server is already running, it needs to be turned off to prevent port conflicts.
+            - Example of error message: "Cannot bind to the port 3001...".
+    - npm Tool & Dependencies
+        - Used npm install command in two ways:
+            1. npm install axios: Saves Axios as a runtime dependency.
+            2. npm install json-server --save-dev: Installs JSON Server as a development dependency.
+        - Axios is necessary for the program's execution.
+        - JSON Server is just for help during development.
+    - Axios and Promises
+        - Axios's get method returns a Promise.
+        - What is a Promise?
+            - Represents the completion or failure of an asynchronous operation.
+            - States of a Promise:
+                1. pending: Operation has not occurred yet.
+                2. fulfilled or resolved: Operation ended successfully.
+                3. rejected: Operation failed.
+        - Using Axios:
+            - Fetch data with axios.get.
+            - Use the then method to register an event listener for the Promise.
+    - Effect Hooks
+        - Introduced in React version 16.8.0.
+        - They allow side effects in function components (e.g., data fetching, setting up a subscription).
+        - Using useEffect:
+            - By default, effects run after every completed render.
+            - The second parameter can specify when the effect is executed.
+            - If the second parameter is an empty array [], the effect is executed only after the component's first render.
+        - Note on useEffect:
+            - The function passed to useEffect gets executed after the component is rendered.
+            - It can fetch data, update state, and cause a re-render.
+    - Application's Current State
+        - Newly added notes aren't saved to the server.
+        - Reloading the app will lose all new additions.
+        - Fix for this issue is upcoming.
+        - Current code available on GitHub (branch part2-4).
+    - Application Development Execution Environment
+        - The configuration of the application has become complex.
+        - A deeper exploration is necessary to understand what's happening in different parts of the configuration.
+- D Editing the data on the server
+    - The main component App contains various functions and hooks:
+        - Uses useEffect to fetch all notes from the server using noteService.getAll().
+        - Function toggleImportanceOf updates the importance of a note.
+        - Function addNote adds a new note.
+    - Mention of complexity:
+        - Explaining this code can be complex.
+        - Many resources are available on the internet to understand it better.
+        - The book Async and performance from the You Do Not Know JS series is recommended for understanding promises.
+    - Defining the note services:
+        - Note services are defined in a module that exports functions like getAll, create, and update.
+        - These functions make HTTP requests using axios to interact with a backend server.
+        - The functions:
+            - getAll: Fetches all notes.
+            - create: Creates a new note.
+            - update: Updates an existing note.
+        - The module exports the functions in an object. ES6 allows for a more concise object definition if field names match variable names.
+    - Explanation about ES6 object definition:
+        - Old way: const person = { name: name, age: age }
+        - ES6 way: const person = { name, age }
+    - Promise and error handling:
+        - Promises can have three states (pending, fulfilled, rejected).
+        - If an HTTP request fails, the promise becomes rejected.
+        - Errors can be handled using a second callback in the then method or by using the catch method.
+        - The catch method can be placed deep in a promise chain to catch any rejections.
+        - Example of error handling: If a note is deleted from the server but the app tries to change its importance, an error message is displayed using alert. The note is then removed from the state using the filter method.
+    - Note on using alert:
+        - While alert is old-fashioned, its battle-tested and can be used for quick error messages. Better methods will be discussed later.
+    - Reference:
+        - Current code for the application is available on GitHub, under branch part2-6.
+- E Adding styles to a React application
+    - State and Lifecycle:
+        - Components have their own state.
+        - To update the UI, the component's state should be updated.
+        - Functional components can utilize states and side-effects using useState and useEffect hooks.
+    - Event Handlers:
+        - Event handlers are defined as component functions.
+        - React event names use camelCase convention.
+        - In JSX, functions are passed directly as the event handler instead of a string.
+    - A more complex state, debugging:
+        - React has built-in mechanisms to help understand component behavior, such as React DevTools.
+        - Components can be broken down to isolate and debug specific behavior.
+    - Challenging Tasks:
+        - Some tasks can be initially skipped and revisited later for better understanding.
+        - Even if tasks are skipped, it's beneficial to go through the material.
+    - Initialization of Memory State:
+        - Notes were initialized with an empty array as a natural initial state value.
+        - In some situations, the natural initial value might be null.
+        - Initializing the state with null can cause the application to crash if the app tries to access properties of a null object.
+    - Error Handling:
+        - The error Cannot read properties of null (reading map) arises because of trying to map over a null value.
+        - The issue arises because the effect is executed only after the first rendering, and during the first rendering, notes is null.
+    - Conditional Rendering:
+        - One solution to the aforementioned problem is conditional rendering: the component returns null if its state hasn't been initialized.
+        - This approach is suitable when the state can't be initialized with a value that is suitable for rendering.
+    - UseEffects Second Parameter:
+        - The second parameter of useEffect determines how often the effect is executed.
+        - When this parameter is an empty array, the effect runs only after the component's first render.
+        - The effect runs every time the content of the array changes.
+    - Fetching Data with useEffect:
+        - The example application fetches currency exchange rates.
+        - The effect function fetches the data after the first render and whenever the currency state changes.
+        - An in-effect condition ensures that data is only fetched when the currency is defined.
+    - API Query Methods:
+        - The demonstrated method for making API queries using useEffect might seem counterintuitive.
+        - It's possible to make API calls directly in the button's handler function, but there are situations where this approach is not optimal.

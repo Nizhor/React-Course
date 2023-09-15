@@ -1,0 +1,80 @@
+- A - The basics of react
+    - Going through the course as i do the process I learn how to setup the react project and interact
+    - am seeing the effects on console which i should always have open
+    - learning to code and use components
+    - learned about props which are inheritable
+    - components start with capital
+        - also they need minimum one root element - div
+            - can instead be a table or just <> <>
+    - in curly braces you can only have primitives
+    - completed the task where we make a new vite project and change the components of app.jsx to have a header content and total
+        - header carrries content of title
+        - content carrries the name and exercise to each name through a key on a map
+        - total carries the exercises
+        - and in our ap function si where everything runs and all the info is input and printed
+- B - Javascript
+    - Basic variable stuff
+    - basic table stuff (array) concat etc
+    - we already went through the functions of const
+    - understanding objects in js with {}
+    - alot of the scripts and how they are/work
+- C - Component State and handling
+    - React applications are divided into components.
+    - Components can be seen as functions that get some input (props) and produce React elements as output.
+    - The virtual DOM represents the state of the application.
+    - Changes in state cause React to re-render the components.
+    - React compares the virtual DOM to the actual DOM and updates accordingly.
+    - React components are re-rendered when:
+        - The component's state changes.
+        - The props of the component change.
+        - The parent component is re-rendered.
+        - When a component is re-rendered, its children are re-rendered.
+    - useState is a hook that adds state to React function components.
+    - useState returns a pair: the current state and a function to update the state.
+    - The component will re-render when its state is modified.
+    - Event handlers, i.e., functions, are registered to be called in connection with certain events.
+        - Example: Button's click event.
+    - In React, registering a function as an event handler for the click event is typically done using the `onClick` attribute.
+    - Event handler functions can be defined directly or separately.
+    - Always pass a function or a reference to a function as an event handler.
+    - Defining event handlers directly inside JSX templates is not always a good practice. However, it can be suitable for simple handlers.
+    - Small components are preferred in React.
+    - Components can be reused in different parts of the application.
+    - React's documentation advises lifting state up to a common parent component when needed.
+    - Child components get re-rendered when the parent is re-rendered.
+    - Always verify the functionality of your code, e.g., by using `console.log`.
+    - Components can be refactored for clarity and conciseness.
+        - For example, using destructuring and concise arrow function syntax.
+- D - More Complex Mode, Debugging react
+    - App Component Overview
+        - Uses React's state management.
+        - Features three buttons, each with its unique event handler.
+    - Event Handlers
+        - Event handlers are defined using the hello function.
+        - The first button uses the hello function with the parameter world.
+        - The second button uses the hello function with the parameter react.
+        - Functions that return functions can define generic functionality that can be refined using parameters.
+    - Function Simplification
+        - The hello function can be made less verbose by eliminating auxiliary variables.
+        - The function can also be used to set the component state.
+    - Event Handler Variations
+        - Event handlers can be created using either functions that return functions or simple arrow functions.
+        - For clarity, the course prefers not using functions that return functions.
+    - Subcomponent: Button
+        - The button functionality has been separated into its own component.
+        - The component receives an event handler and a text string as props.
+    - Component Definition Practices
+        - Avoid defining a component inside another component.
+        - This can cause optimization issues with React.
+        - Components should be defined outside the main component function.
+    - Useful Material
+        - React's official documentation is recommended, though parts related to Class components are outdated.
+        - The React tutorial isn't highly recommended.
+        - Courses from Egghead.io offer good content, but some use outdated Class components.
+    - Oath of the Web Programmer
+        - Programming is challenging, and various practices are recommended for efficiency:
+            - Always keep the browser console open.
+            - Make progress in small steps.
+            - Use the console.log command frequently for understanding and debugging.
+            - If code fails, avoid adding more lines until the issue is resolved.
+            - When seeking help online, always phrase questions clearly.

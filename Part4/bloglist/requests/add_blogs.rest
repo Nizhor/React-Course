@@ -3,9 +3,9 @@ Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzZGZzZGEiLCJpZCI6IjYyN2QxM2MwN2NhNDRkYzY5YzkzNDU5NiIsImlhdCI6MTY1MjM3NjI3MCwiZXhwIjoxNjUyMzc5ODcwfQ.Z3PYrIxt3sZ-S3HbNXWPgM_9xZt-qZZrG_ZVWTscBv8
 
 {
-  "title": "sadfdsa",
+  "title": "meep",
   "author": "Dan",
-  "likes": 5,
-  "url": "www.example.com"
+  "likes": 500,
+  "url": "www.dan.com"
   
 }

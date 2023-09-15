@@ -1,0 +1,147 @@
+- A Structure of backend application, introduction to testing
+    
+    Project Structure:
+    
+    - Introduced the importance of automated testing in software development.
+    - Created a file utils/for_testing.js containing two functions, reverse and average.
+    - Mentioned the array reduce method and a recommendation to watch related videos for clarity.
+    
+    Note on Exports:
+    
+    - Both reverse and average functions are made available for importing via module.exports.
+    
+    Testing Node Applications:
+    
+    - Introduced and installed Jest for testing
+    - Configured Jest in package.json and adjusted ESLint settings for Jest compatibility
+    - Created tests for reverse and average functions in separate files
+    - Demonstrated Jest error messages and conventions
+    - Addressed and fixed a bug in the average function with empty arrays
+- B Testing the backend
+    - Set up your local development environment.
+    - Choose a suitable Node.js version.
+    - Initialize a new project with npm init.
+    - Install Express using npm.
+    - Create an entry file, typically named server.js or index.js.
+    - Set up a basic server using Express.
+    - Connect to MongoDB using Mongoose.
+    - Design the data schema and models for your resources.
+    - Implement CRUD operations for each resource:
+        - Create endpoints to handle GET, POST, PUT, and DELETE requests.
+        - Use appropriate HTTP status codes.
+        - Handle errors gracefully.
+    - Apply middleware for tasks like logging, error-handling, or serving static files.
+    - Implement user authentication:
+        - Install and configure Passport.js.
+        - Choose an authentication strategy (e.g., Local, JWT).
+        - Protect routes that require authentication.
+    - Implement user registration:
+        - Create routes for sign-up.
+        - Hash and salt passwords for security using bcrypt.
+        - Store user data in the MongoDB database.
+    - Implement JWT for authentication:
+        - Use the jsonwebtoken package.
+        - Generate and verify JWTs.
+        - Store tokens securely (avoid local storage for sensitive applications).
+    - Test your API endpoints using tools like Postman or Insomnia.
+    - Consider organizing your routes using the Router class from Express.
+    - Handle CORS issues by setting appropriate headers or using the cors middleware.
+    - Paginate and filter results for scalability and usability.
+    - Ensure that you are validating and sanitizing inputs to avoid security issues.
+    - Consider adding a layer of service between your routes and models for business logic.
+- C User Administration
+    
+    Setting Up Test Environment
+    
+    - Use required modules:
+        - bcrypt for password hashing
+        - User model for database operations
+    
+    Testing Users
+    
+    - Initialize tests with one user in the database
+        - Delete all existing users
+        - Create a new user with username root and a hashed password
+    - Test for new user creation
+        - Start with the initial number of users
+        - Create a user with a new username
+        - Confirm successful creation with status
+        - Verify the number of users increased
+        - Confirm the new username exists in the database
+    - Test for duplicate username during user creation
+        - Start with the initial number of users
+        - Attempt to create a user with the existing username root
+        - Expect an error response
+        - Confirm error message indicates username uniqueness
+        - Ensure total user count remains unchanged
+    
+    Using Helper Functions
+    
+    - Implement usersInDb helper function
+        - Fetch all users from the database
+        - Convert the result to JSON format
+    
+    Enhancing User Model
+    
+    - Ensure username uniqueness
+        - Install mongoose-unique-validator
+        - Modify user schema to use the validator
+        - Set username as unique and required
+    
+    Retrieve All Users
+    
+    - Implement a route to fetch all users
+        - Handle GET request to /api/users
+        - Return all users in JSON format
+    
+    Sample User Creation Request Format
+    
+    - Provide attributes like username, name, and password
+    
+    Adding Notes
+    
+    - Store reference to the user in the note
+    - Update the note schema to include a user reference
+    
+    Using the Populate Method with Mongoose
+    
+    - Join queries between collections using Mongoose populate method
+    - Update routes to return populated data
+    - Define reference types in Mongoose schema using the ref option
+- D Token Authentication
+    
+    Token Authentication
+    
+    - Users must be able to log into our application
+    - When a user is logged in, their user information must automatically be attached to any new notes they create
+    - Implement support for token-based authentication to the backend
+    
+    Principles of Token-Based Authentication
+    
+    - User starts by logging in using a login form implemented with React
+    - React code sends the username and password to the server address /api/login as a HTTP POST request
+    - If the username and password are correct, the server generates a token that identifies the logged-in user
+    - The token is signed digitally, making it impossible to falsify with cryptographic means
+    - Backend responds with a status code indicating the operation was successful and returns the token with the response
+    - Browser saves the token, for example to the state of a React application
+    - When the user creates a new note or does some other operation requiring identification, the React code sends the token to the server with the request
+    - The server uses the token to identify the user
+    
+    Implementation
+    
+    - Install the jsonwebtoken library to generate JSON web tokens
+    - Create a login route in controllers/login.js where users can send their credentials to receive a token if they are valid
+    - If a user is not found or the password is incorrect, respond with status code 401 unauthorized
+    - Generate the token with the jwt.sign method
+    - Digital signature is ensured by a string from the environment variable SECRET
+    - Set this variable in the .env file
+    - A successful request is responded to with status code 200 OK, returning the generated token and the username of the user
+    - Integrate the login route to the application by adding the router to app.js
+    
+    Limiting Creating New Notes to Logged-in Users
+    
+    - Ensure that only logged-in users with a valid token can create new notes
+    - Token is sent in the Authorization header using the Bearer scheme
+    - Use jwt.verify to verify the validity of the token
+    - If invalid or missing, return an error
+    - Object decoded from the token contains the username and id, which identifies the user making the request

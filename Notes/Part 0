@@ -1,0 +1,93 @@
+Intro:
+
+- Keep console open at all time when developing
+
+HTTP GET:
+
+- HTTP GET is a protocol used by the browser and the web server to communicate with each other.
+- HTTP GET is used to retrieve the content of a page from the server.
+- HTTP GET is part of the HTTP protocol.
+
+Traditional Web Application:
+
+- Traditional web applications are server-side applications where the server contains all application logic.
+- The browser only requests content in HTML form from the server.
+- The content on the page is static and does not change without a refresh.
+
+Application Logic to be Executed in the Browser:
+
+- Application logic executed in the browser is used to improve the user experience by making web applications more interactive.
+- JavaScript is commonly used to execute application logic in the browser.
+- Application logic in the browser can manipulate the Document Object Model (DOM) to change the content of the page dynamically.
+
+Event Handler and Callback:
+
+- Event handlers and callbacks are commonly used mechanisms for code execution in JavaScript.
+- An event handler is a piece of code that is executed when a specific event occurs.
+- A callback is a function that is passed as an argument to another function and is executed when the function completes.
+
+Document Object Model or DOM:
+
+- The Document Object Model (DOM) is the API that allows JavaScript to interact with the page.
+- The DOM is a tree-like structure of nodes and elements representing the HTML document.
+- JavaScript can manipulate the DOM to change the content of the page dynamically.
+
+Document Object and Page Manipulation from the Console:
+
+- The browser console can be used to manipulate the DOM and the content of the page.
+- JavaScript code can be executed in the console to manipulate the content of the page.
+- This is a powerful tool for web developers, as it allows them to experiment with different ways of manipulating the page without having to modify the code directly.
+
+CSS:
+
+- CSS is used to style the content of the page.
+- CSS can be used to change the appearance of the page, including the font size, color, and layout.
+- CSS can also be used to create responsive designs that adjust to different screen sizes and devices.
+
+Loading a Page with JavaScript - Repeat:
+
+- AJAX is a technique used to load data from a server without having to refresh the entire page.
+- AJAX can be used to load content into the page without a full refresh.
+- This is useful for creating more responsive web applications, as it allows data to be loaded in the background without disrupting the user experience.
+
+Form and HTTP POST:
+
+- HTTP POST is used to send data from the browser to the server.
+- Forms are commonly used to send data to the server, such as login credentials or search queries.
+- HTTP POST is part of the HTTP protocol.
+
+AJAX:
+
+- AJAX is a technique used to load data from a server without having to refresh the entire page.
+- AJAX can be used to load content into the page without a full refresh.
+- This is useful for creating more responsive web applications, as it allows data to be loaded in the background without disrupting the user experience.
+
+Single Page App:
+
+- A Single Page App (SPA) is a web application that loads a single HTML page and dynamically updates the content as the user interacts with the app.
+- SPAs use AJAX to load content dynamically, which allows data to be loaded in the background without disrupting the user experience.
+- SPAs provide a more responsive user experience than traditional web applications.
+
+JavaScript Libraries:
+
+- JavaScript libraries can be used to simplify the development process and provide additional functionality.
+- Popular JavaScript libraries include jQuery, React, and Vue.
+- JavaScript libraries can help to speed up development by providing pre-written code with common functionality.
+
+Full Stack Web Application Development:
+
+- Full stack web application development refers to the development of both front-end and back-end components of a web application.
+- Full stack developers are proficient in both front-end and back-end development.
+- Full stack development requires knowledge of multiple technologies, including HTML, CSS, JavaScript, and server-side programming languages such as PHP or Python.
+
+JavaScript Fatigue:
+
+- JavaScript fatigue refers to the frustration and exhaustion that can arise from the rapid pace of change in the JavaScript ecosystem.
+- Keeping up with new developments in the JavaScript ecosystem can be challenging.
+- Many developers find it difficult to keep up with the latest trends and technologies in JavaScript development.
+
+Missions:
+
+- The Missions section of the document contains exercises for the reader to reinforce their understanding of the concepts covered.
+- Missions provide hands-on experience with web development concepts.
+- They are a valuable resource for anyone learning web development.

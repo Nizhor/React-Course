@@ -1,0 +1,169 @@
+- A Node.js and Express
+    - **Safety**:
+        - HTTP standard states that GET and HEAD requests should be safe.
+        - "Safe" means executing the request shouldn't cause side effects on the server.
+        - GET requests, under RESTful principles, are always used safely.
+        - HEAD requests function like GET but only return the status code and headers, not the response body.
+    - **Idempotency**:
+        - Idempotent requests, when repeated, have the same effect as a single request.
+        - According to HTTP standards, GET, HEAD, PUT, and DELETE should be idempotent.
+        - RESTful principles make these methods idempotent.
+        - Example: Multiple identical PUT requests to /api/notes/10  yield the same result.
+    - **POST Requests**:
+        - Unique in that they are neither safe nor idempotent.
+        - Sending the same POST request multiple times can result in repeated data on the server.
+    
+    **Middleware in Express**:
+    
+    - **Definition**:
+        - Middleware are functions used for handling request and response objects.
+        - They can manipulate, process, or even terminate requests and responses.
+    - **JSON-Parser Middleware**:
+        - An example middleware that takes raw data from requests, parses it, and assigns it to the request object as the body property.
+    - **Order of Execution**:
+        - Multiple middlewares are executed in the order they are introduced in Express.
+        - Order matters: e.g., the json-parser should be used before requestLogger to ensure request.body is initialized.
+    - **Implementing Middleware**:
+        - Middleware functions receive three parameters: request, response, and next.
+        - Example middleware, request logger, prints information about each request.
+        - The next function passes control to the subsequent middleware.
+    - **Middleware Usage**:
+        - Use the app.use() method to apply middleware.
+        - Middleware should be used before routes if they need to execute before route handlers.
+        - Middleware after routes handles requests that no route addresses.
+    - **Example of Middleware after Routes**:
+        - unknownEndpoint middleware handles requests to non-existent routes.
+        - For such requests, it returns a 404 status with an "unknown endpoint" error message.
+- B Deploying App to internet
+    
+    Frontend Production Build:
+    
+    - Development mode offers clear error messages and immediate rendering.
+    - For deployment, a production-optimized build is necessary.
+    - Vite projects use npm run build for a production build.
+    - This produces a minified list directory, consolidating all JavaScript into one file.
+    
+    Serving Static Files from the Backend:
+    
+    - You can deploy the frontend by copying its production build to the backend repository root.
+    - Express's static middleware allows serving of static content.
+    - Express will check the list directory for files when receiving HTTP GET requests.
+    - Both frontend and backend can exist at the same address, allowing relative URL declarations.
+    
+    Deployment Overview:
+    
+    - When accessing `http://localhost:3001`, the server provides the index.html from the list directory.
+    - The HTML file has instructions to fetch application CSS and JavaScript, initiating the React app.
+    - The React code subsequently fetches notes from the server.
+    
+    Deploying the Whole App to the Internet:
+    
+    - Before deploying globally, ensure the app works locally.
+    - Commit the production frontend build to the backend repository and push to GitHub.
+    - Services like Render or [Fly.io](http://fly.io/) handle deployment.
+    - Consider renaming directories if certain files are ignored during deployment (e.g., using .dockerignore).
+    
+    Streamlining Frontend Deployment:
+    
+    - Add npm-scripts to the package.json of the backend to automate frontend production builds.
+    - These scripts can help build the frontend, copy it to the backend repository, and deploy everything.
+    - Windows users might need different shell commands or configuration.
+    - Directory paths in scripts are dependent on file system repository locations.
+    
+    Proxy Configuration:
+    
+    - Changes in the frontend can break the development mode due to URL changes.
+    - For Vite projects, you can solve this by setting up a proxy in the Vite.config.json.
+    - The proxy redirects requests from `http://localhost:3000` to `http://localhost:3001`.
+    
+    Other Notes:
+    
+    - A drawback is the complexity of frontend deployment, which requires generating new builds and copying them to the backend.
+    - Building a deployment pipeline is discussed in part 11 of the course.
+    - Sometimes, it's beneficial to deploy frontend code as a separate application.
+- C Saving Data to Mongo DB
+    
+    **Error Handling**
+    
+    - If a note's ID does not exist in the database, the server should respond with a 404 (Not Found) status.
+    - If the promise from the findById method is rejected, respond with a 500 (Internal Server Error) status.
+    - Handle errors resulting from incorrect or malformed IDs by responding with a 400 (Bad Request) status.
+    - Promises should always have error and exception handling to prevent unexpected bugs.
+    - Logging error objects can save time in debugging and can be essential for monitoring in production systems.
+    
+    **Middleware and Execution Order**
+    
+    - Middleware execution order in Express is determined by the sequence they are loaded using app.use.
+    - The JSON parser middleware (express.json()) should be among the first middleware loaded.
+    - Middleware to handle unsupported routes should be loaded near the end, just before the error handler.
+    - The error handler middleware must be the last middleware loaded to effectively catch and handle all preceding errors.
+    - Express error handlers are defined as middleware functions with four parameters: (error, request, response, next).
+    
+    **Other Operations (CRUD Operations)**
+    
+    - Notes can be deleted from the database using the findByIdAndRemove method.
+    - The importance of a note can be toggled using the findByIdAndUpdate method.
+    - The findByIdAndUpdate method, by default, returns the original document. To get the updated document, use the { new: true} option.
+    - When performing full-stack development:
+        - Keep browser developer console open.
+        - Use the network tab of the browser dev tools.
+        - Monitor server state and database state.
+        - Progress in small increments.
+        - Use console.log extensively for understanding and debugging.
+        - If code isn't working, consider rolling back to a previously working state.
+        - Properly formulate questions when seeking help.
+- D Validation and ESLint
+    
+    **Validation**
+    
+    - Constraints ensure data stored in an applications database is valid.
+    - Notes should not have missing or empty content properties.
+        - Invalid notes return a 400 status code.
+    - Mongoose provides validation functionality for data.
+        - Example: Define validation rules directly in the schema.
+    - Built-in Mongoose validators:
+        - minLength - specifies the minimum length for a string.
+        - required - specifies that a field cannot be missing.
+    - Mongoose allows for custom validators.
+    - When database constraints are violated, an exception is thrown.
+    - Handlers should pass exceptions to error handler middleware.
+    - Validation errors:
+        - Example: When [error.name](http://error.name/) is ValidationError, respond with a 400 status code.
+    - Validations are not run by default with findOneAndUpdate.
+        - Fixed by specifying { runValidators: true, context: query } options.
+    
+    **Deployment**
+    
+    - Deploying to [Fly.io/Render](http://fly.io/Render) requires setting environment variables.
+        - dotenv is used for non-production environments.
+        - Set production database URL in the hosting service.
+    - [Fly.io](http://fly.io/): fly secrets set MONGODB_URI=database_url to set the database URL.
+    - Its common to encounter issues during first-time deployments.
+        - Always keep the browser console open for debugging.
+        - Server logs, such as fly logs, are essential to diagnose issues.
+        - Ensure all necessary environment variables are set.
+    
+    **Linting with ESLint**
+    
+    - Linting tools detect and flag errors in programming languages.
+        - Static analysis of source code to detect stylistic and other errors.
+        - In JavaScript, ESLint is a popular linting tool.
+    - Installation:
+        - Install as a development dependency: npm install eslint --save-dev.
+        - Initialize default ESLint configuration with npx eslint --init.
+    - ESLint Configuration:
+        - .eslintrc.js contains configuration rules.
+        - Configuration can specify environment, parser options, and linting rules.
+        - Examples of rules: Indentation, quotes style, semicolon usage, etc.
+    - Running ESLint:
+        - Lint specific files with npx eslint filename.
+        - Add an npm script, such as "lint": "eslint .", to lint all project files.
+        - .eslintignore can exclude specific directories or files from being linted.
+    - Integrating with IDEs:
+        - Visual Studio Code ESLint plugin highlights errors directly in the editor.
+    - Customizing ESLint Rules:
+        - Can customize rules in .eslintrc.js.
+        - Examples: eqeqeq (enforce triple equals), no-trailing-spaces, arrow-spacing, etc.
+        - Extending rule sets, like eslint:recommended, to use a predefined set of rules.
+        - Disable specific rules by setting their value to 0, e.g., no-console: 0.
+    - Organizations may adopt or define specific ESLint configurations, e.g., Airbnbs ESlint configuration.
