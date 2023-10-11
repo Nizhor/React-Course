@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.set('strictQuery', true);
 
 if (process.argv.length < 3) {
   console.log(

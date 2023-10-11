@@ -1,5 +1,5 @@
 archive for now/
 node_modules/
 *.json
-
+*.env
 ```

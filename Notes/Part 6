@@ -1,0 +1,217 @@
+- A - Flux-architecture and Redux
+    - Flux-architecture and Redux:
+        - Followed state management conventions recommended by React.
+        - Placed state and handling functions in higher-level component structure.
+        - As applications grew larger, state management becomes challenging.
+    - Flux-architecture:
+        - Developed by Facebook to simplify state management in React apps.
+        - Separates state from React components into its own stores.
+        - State in the store is changed with different actions.
+        - Views are rerendered when actions change the state of the store.
+    - Redux:
+        - Uses the same principle as Flux but is simpler.
+        - Facebook now prefers Redux over Flux.
+        - State stored in a single JavaScript object in the store.
+        - State changes occur through actions.
+        - Actions are objects with a type field.
+        - Reducer function defines the impact of actions on the state.
+    - Reducer:
+        - Receives current state and an action as parameters.
+        - Returns a new state based on the action type.
+        - Uses the switch statement for common reducer implementation.
+        - Reducer should not be called directly; it's passed to createStore.
+    - Store:
+        - Created using createStore from 'redux' library.
+        - Handles actions dispatched with store.dispatch().
+        - State can be accessed using store.getState().
+        - Subscribe method registers callback functions for action changes.
+    - Counter Application (Redux):
+        - Implements a simple counter app using Redux.
+        - State managed using a reducer.
+        - Reducer handles INCREMENT, DECREMENT, and ZERO actions.
+        - Store is created with createStore.
+        - App component renders state and dispatches actions.
+        - subscribe method ensures re-renders on state changes.
+    - Redux Toolkit Recommendation:
+        - createStore is recommended to be replaced with configureStore.
+        - Redux Toolkit simplifies Redux logic and is recommended for new code.
+        - Use Redux Toolkit for all Redux code.
+    - Redux for Notes:
+        - A note application using Redux for state management.
+        - Reducer handles NEW_NOTE and TOGGLE_IMPORTANCE actions.
+        - Tests are created for the reducer using Jest.
+        - Reducer code is made immutable and pure.
+    - Using Array Spread Syntax:
+        - Array spread syntax is used to create a new state.
+        - Spread syntax breaks an array into individual elements.
+        - It can also gather the rest of the elements when destructuring.
+        - Improves readability and simplifies code.
+    - Uncontrolled Form:
+        - This kind of form doesn't bind the state of its form fields to the state of the parent component, making it uncontrolled.
+        - While they have some limitations, they can be suitable depending on the requirements.
+    - Action Creators:
+        - In order to further simplify Redux implementation in frontend code, actions can be separated into distinct functions.
+        - Functions that generate actions are termed as action creators.
+        - This allows the React components to remain unaware of the specifics of Redux action types and shapes.
+    - Forwarding Redux Store to Components:
+        - As an application grows, keeping everything in a single file isn't practical.
+        - When components are split across multiple files, a mechanism is needed to share the Redux store with all of them.
+        - The react-redux library provides hooks like useDispatch and useSelector for this purpose.
+    - Provider Component:
+        - React-redux's Provider component allows the Redux store to be accessible to all child components without explicitly passing it around as props.
+    - Multiple Exports:
+        - While a module can have only one default export, it can contain several named exports.
+    - Component Division:
+        - To modularize the codebase further, different functionalities can be separated into their own components.
+        - Components that just present data are termed "presentational," whereas those that contain logic and manage data are termed "container" components.
+    - Redux with React:
+        - In the provided application, logic for changing the state is neatly isolated from the rest of the React components.
+        - This separation makes it easier to maintain and understand the codebase.
+- B - Many reducers
+    - Many reducers
+        - Continue work with simplified Redux for notes application.
+        - Change reducer to initialize store with predefined state.
+        - Initial state contains two notes.
+        - noteReducer handles state.
+    - Store with complex state
+        - Implement filtering for displayed notes.
+        - User interface for filters uses radio buttons.
+        - Simple and straightforward implementation.
+        - Radio buttons form a group, only one can be selected.
+        - Change handler only logs selected value.
+        - Filter value stored in redux store.
+        - New store state structure: notes array and filter string.
+        - New state has notes array and filter string.
+        - Only array of notes stored in current state.
+    - Combined reducers
+        - Define a new reducer for filter state.
+        - Actions for changing filter state.
+        - Create action creator function.
+        - Combine noteReducer and filterReducer with combineReducers function.
+        - Combine reducers in main.jsx file.
+        - Combined reducer defines state with notes and filter properties.
+        - Each reducer handles its respective part of state.
+        - All actions get handled in each part of combined reducer.
+        - Actions can affect multiple parts of state.
+    - Finishing the filters
+        - Update rendering to use combined reducer.
+        - Fix bug due to expecting store to be array of notes.
+        - Update selector function to get notes from state.notes.
+        - Extract visibility filter to own component: VisibilityFilter.jsx.
+        - App component simplified to include NewNote, VisibilityFilter, and Notes components.
+        - Clicking radio buttons changes stores filter property.
+        - Update Notes component to use filter.
+        - Selector function changes based on filter value.
+        - Simplify selector function by destructuring state.
+        - Cosmetic flaw: default filter is ALL but radio button isnt selected.
+        - Current version found on GitHub, branch part6-2.
+    - Redux Toolkit
+        - Redux configuration and state management can be cumbersome.
+        - Reducer and action creator-related code can be repetitive.
+        - Redux Toolkit is a solution to these common Redux problems.
+        - Redux Toolkit simplifies Redux store configuration.
+        - Redux Toolkit provides tools for easier state management.
+    - Refactoring with Redux Toolkit
+        - Install the library using: npm install @reduxjs/toolkit.
+        - In main.jsx, replace Redouxs createStore with Redux Toolkits configureStore.
+        - No need for combineReducers function.
+    - Benefits of using Redux Toolkit
+        - configureStore has benefits like effortless integration of development tools.
+        - Reducers can be refactored using the createSlice function.
+        - createSlice allows easy creation of reducer and action creators.
+    - Reducer refactoring with createSlice
+        - createSlice uses a name parameter to prefix actions type values.
+        - It also has an initialState parameter and a reducers parameter.
+        - Inside the createNote action, the state can seem to be mutated.
+    - Immer Library
+        - Redux Toolkit uses Immer library with createSlice function.
+        - Immer allows mutating the state in the reducer but produces an immutable state.
+        - This approach can be handy for complex state updates.
+    - Action creators and reducers with createSlice
+        - createSlice returns both the reducer and action creators.
+        - They can be accessed using properties like noteSlice.actions and noteSlice.reducer.
+    - Redux Toolkit with console.log
+        - console.log is a powerful debugging tool.
+        - In a reducer created with createSlice, printing state directly may not be informative due to Immer.
+        - Convert the state to a string and back to get a human-readable format.
+    - Redux DevTools
+        - Redux DevTools is a Chrome addon for Redux development.
+        - It allows inspection of the Redux stores state and dispatching actions via the browser.
+        - No extra configuration is needed when using configureStore from Redux Toolkit.
+        - Actions can be dispatched and inspected in Redux DevTools.
+- C - Communicating with server in a redux application
+    - Communicating with server in a redux application
+    - Expand application for backend storage using json-server
+    - Initial database state in db.json file at project root
+    - Install json-server for the project using npm
+    - Add script line to package.json for json-server
+    - Launch json-server with npm run server command
+    - Getting data from the backend:
+        - Create method in services/notes.js
+        - Use axios to fetch data
+        - Install axios in the project
+        - Change state initialization in noteReducer for no default notes
+        - Add new action appendNote for note addition
+        - Initialize notes state based on server data by fetching in main.jsx and dispatching actions for each note
+        - Improve code by adding action creator setNotes to replace entire notes array
+        - Use effect hook for fetching data from server in the App component
+    - Sending data to the backend:
+        - Expand server communication code to send data
+        - Modify addNote method of NewNote component
+        - Adjust createNote action creator since backend generates note IDs
+        - Implement importance toggle using similar principle
+    - Current state of code available on GitHub in part6-3 branch
+    - Asynchronous actions and Redux thunk:
+        - Improve by abstracting server communication away from component functions
+        - Use Redux Thunk for async actions without additional configurations
+        - Implement action creators that return functions instead of objects
+        - Define initializeNotes action creator to initialize notes from server data
+        - Separate notes initialization logic from React component for clarity
+        - Replace createNote action creator with asynchronous version
+        - Modify NewNote component to dispatch the new createNote action
+        - Move Redux store creation code to a separate store.js file
+        - Update content of index.js to reflect changes
+    - Current state of code available on GitHub in part6-5 branch
+    - Redux Toolkit provides tools like createAsyncThunk and RTK Query API for asynchronous state management.
+- D - React Query, useReducer and the context
+    - React Query, useReducer, and the context
+    - After this part, more methods for state management will be discussed.
+    - Continuing with the note application, focus is on server communication.
+    - Starting application from scratch with a basic version.
+    - Managing data on the server with React Query library.
+    - The React Query library can also be referred to as TanStack Query.
+    - Installation command: npm install @tanstack/react-query
+    - Updates to main.jsx are required to utilize the library functions.
+    - Notes can be retrieved in the App component, with expanded code using useQuery.
+    - Data retrieval involves the Axios get method.
+    - The first render of the component shows a loading state.
+    - Application retrieves data from server without using React hooks like useState and useEffect.
+    - Server data management is now through the React Query library, eliminating the need for useState.
+    - Functions making HTTP requests are moved to a separate file: requests.js.
+    - App component has been slightly simplified.
+    - Current code for this phase is in GitHub branch part6-1.
+    - Synchronizing data to the server using React Query.
+    - Next steps involve storing added and modified data on the server.
+    - A function named createNote is added to requests.js for saving new notes.
+    - The App component undergoes modifications for note creation.
+    - A mutation is introduced using the useMutation function.
+    - New notes are saved on the server but need to be updated on the screen.
+    - React Querys invalidateQueries method helps refresh the displayed notes.
+    - A function for updating notes importance is added to requests.js.
+    - Updated notes are managed by a mutation, with the App component expanded.
+    - Current code is on GitHub branch part6-2.
+    - Optimizing the performance is essential.
+    - After a PUT request, the application sends a new GET request to fetch updated data from the server.
+    - If theres a lot of data, this might strain the server.
+    - Performance can be optimized by manually updating the query state managed by React Query.
+    - An optional exercise is left for a similar change regarding the importance of notes.
+    - By default, React Query updates all notes as soon as the cursor moves to the input field.
+    - Default behavior can be modified using the refetchOnWindowFocus flag.
+    - React Query causes re-renders in the application when necessary.
+    - Current application code is in GitHub branch part6-3.
+    - React Query is versatile and can simplify applications.
+    - It does not make more complex state management solutions like Redux redundant.
+    - React Query focuses on server-state management, acting as a cache for server data.
+    - Redux and similar libraries handle client-side state, which may be inefficient compared to React Query.
+    - React Query eases server data processing and can reduce the need to save server data in the frontend state.
+    - Many React applications need both temporary server data storage and a solution for other frontend state components.

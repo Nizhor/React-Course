@@ -1,0 +1,294 @@
+- A - Background and introduction
+    - Fullstack Part 9 focuses on background and introduction.
+    - TypeScript is a programming language designed for large-scale JavaScript development.
+    - Created by Microsoft.
+    - Microsofts Azure Management Portal has 12 million lines of code.
+    - Visual Studio Code has 300,000 lines of code.
+    - Both are written in TypeScript.
+    - TypeScript offers better development-time tooling, static code analysis, compile-time type checking, and code-level documentation.
+    - TypeScript is a typed superset of JavaScript.
+    - It compiles into plain JavaScript code.
+    - Programmer can decide the version of the generated code.
+    - All existing JavaScript code is valid TypeScript.
+    - TypeScript has three parts: the language, the compiler, and the language service.
+    - The language includes syntax, keywords, and type annotations.
+    - The compiler is responsible for type information erasure and code transformations.
+    - The language service collects type information for development tools.
+    - TypeScript key language features include type annotations, structural typing, type inference, and type erasure.
+    - TypeScript removes all type system constructs during compilation.
+    - No type information remains at runtime.
+    - Reasons to use TypeScript include type checking, static code analysis, and code-level documentation.
+    - Types can be reused throughout the code base.
+    - Changes to a type definition are automatically reflected everywhere the type is used.
+    - Code-level documentation can be achieved with JSDoc, but TypeScript's types are more tightly connected to the code.
+    - IDEs provide smarter IntelliSense with TypeScript due to precise knowledge of data types.
+    - TypeScript aids in refactoring with static code analysis, IntelliSense, and code-level documentation.
+    - TypeScript allows for early adoption of new JavaScript language features by adjusting its configuration.
+    - TypeScript type annotations and type checking exist only at compile time, not at runtime.
+    - Runtime errors are still possible even if the compiler doesn't throw any errors.
+    - Common runtime errors occur when handling external input, like data from network requests.
+    - Issues with TypeScript include:
+        - Incomplete, invalid, or missing types in external libraries.
+        - Some libraries might not have accurate type declarations.
+        - DefinitelyTyped GitHub page is a popular source for type declaration files.
+        - Sometimes type inference in TypeScript needs assistance.
+        - Be cautious with type casting, also known as type assertion or type guards.
+        - TypeScript error messages can sometimes be hard to understand, especially with complex types.
+        - For long TypeScript error messages, it's often helpful to start reading from the end.
+- B - First steps with TypeScript
+    - First steps with TypeScript
+    - Introduction to TypeScript principles
+    - Becoming FullStack TypeScript developers
+    - Focus on common issues in Express backends and React frontends with TypeScript
+    - Emphasis on tooling
+    - Setting things up
+        - Install TypeScript support to your editor
+        - Visual Studio Code natively supports TypeScript
+        - TypeScript must be compiled into executable JavaScript
+        - Production environment requires a "build step"
+        - Development environment uses real-time compilation and auto-reloading
+        - Start with npm package ts-node for simplicity
+        - Install ts-node and typescript globally: npm install -g ts-node typescript
+    - Creating an npm project
+        - Initialize an npm project with npm init
+        - Install dependencies locally: npm install --save-dev ts-node typescript
+        - Set up scripts in package.json:
+            - "scripts": {
+                - "ts-node": "ts-node"
+                }
+    - TypeScript Online Playground
+        - TypeScript provides an online playground
+        - Quickly try out TypeScript code
+        - Instantly see resulting JavaScript and compilation errors
+        - Access TypeScript's official playground online
+    - A note about coding style
+        - JavaScript allows flexibility in coding style
+        - This course uses semicolons and specific coding conventions
+        - Follow the coding style in exercises
+    - tsconfig.json Configuration
+        - Create tsconfig.json in the project with:
+            - {
+                - "compilerOptions": {
+                    - "noImplicitAny": false
+                    }
+                    }
+        - tsconfig.json defines how TypeScript compiler interprets the code
+        - We set "noImplicitAny" to false to not require types for all variables
+    - Creating a simple Multiplier
+        - Write a basic JavaScript function
+        - Compile and run using npm run ts-node
+    - Adding types to parameters
+        - Add types to function parameters
+        - TypeScript prevents incorrect type usage
+        - Compiler checks type compatibility
+        - Use type guards for type narrowing
+    - Creating custom types
+        - Define custom types using the type keyword
+        - Create a type alias for specific values
+        - Ensure type safety in function parameters and return values
+    - Type narrowing
+        - Use type guards for narrowing types
+        - TypeScript's instanceof type guard
+        - Improve type safety with narrowing
+    - Accessing command line arguments
+        - Access command-line arguments using process.argv
+        - Install @types/node for typings
+        - Set up npm scripts to run programs with parameters
+    - Improving the project
+        - Parse and validate command-line arguments
+        - Ensure proper error handling for invalid inputs
+        - Define interfaces and return types for functions
+    - Adding Express to your TypeScript project
+        - Install Express using npm
+        - Configure Express routes and endpoints
+    - Migrating to ES6 import statements
+        - Replace "require" with ES6 "import" for module imports
+        - Utilize TypeScript's type checking for better code quality
+    - Installing type definitions for Express
+        - Install "@types/express" to get TypeScript type definitions for Express
+        - Ensure type safety when working with Express objects and methods
+    - Setting up auto-reloading with ts-node-dev
+        - Install "ts-node-dev" as a development dependency
+        - Configure a "dev" script in "package.json" for auto-reloading during development
+    - TypeScript best practices
+        - Enable "noImplicitAny" to prevent implicit "any" types
+        - Use ESLint with TypeScript-specific rules to maintain code quality
+    - Type assertion
+        - Use type assertions (e.g., "op as Operation") to specify expected types
+        - Exercise caution when using type assertions to avoid runtime errors
+    - Data validation
+        - Implement data validation for endpoints to handle invalid input gracefully
+    - Type narrowing (upcoming chapter)
+        - Explore type narrowing as a safer way to assign stricter types to external data
+- C - Typing an Express app
+    
+    Setting up the project:
+    
+    - Initialize Node.js project with npm or yarn.
+    - Install Express.js and TypeScript.
+    - Set up basic Express server with routes.
+    
+    Let there be code:
+    
+    - Create DiaryService module for diary entries.
+    - Define route handlers for HTTP GET and POST requests.
+    - Establish foundation for diary entry functionality.
+    
+    Implementing the functionality:
+    
+    - Extend backend to support fetching and adding diary entries.
+    - Implement route handlers for fetching all entries and adding new entry.
+    - Interact with DiaryService module for CRUD operations.
+    
+    Node and JSON modules:
+    
+    - Use Node.js to create HTTP server.
+    - Work with JSON files for diary entry data.
+    - Ensure proper module importing and exporting.
+    
+    Utility Types:
+    
+    - Define TypeScript types: DiaryEntry, NewDiaryEntry, Visibility, Weather.
+    - Ensure type safety and consistency.
+    - Use utility types to represent entry structure.
+    
+    Preventing an accidental undefined result:
+    
+    - Address potential undefined result issues.
+    - Use TypeScript for strict typing.
+    - Enhance code reliability for object not found cases.
+    
+    Adding a new diary:
+    
+    - Implement HTTP POST endpoint for new entries.
+    - Accept data as object in request body.
+    - Validate and process data for new entries.
+    
+    Proofing requests:
+    
+    - Focus on data validation and parsing.
+    - Create dedicated function, toNewDiaryEntry, for parsing and validation.
+    - Handle exceptions and errors with meaningful messages.
+    
+    Type guards:
+    
+    - Implement type guard functions for type narrowing.
+    - Ensure input data matches expected types.
+    - Use TypeScript type guards for comment, date, weather, and visibility.
+    
+    Enum:
+    
+    - Employ TypeScript enums for valid values in Weather and Visibility fields.
+    - Restrict input data to predefined values.
+    - Update existing data to match new enum-based types.
+- D - React with types
+    - React with types
+        - Catch errors with TypeScript:
+            - Passing extra/unwanted prop to a component
+            - Forgetting to pass a required prop to a component
+            - Passing a prop with the wrong type to a component
+        - TypeScript helps catch errors in the editor
+        - Without TypeScript, errors found later during testing
+    - Create React App with TypeScript
+        - Use create-react-app with a template argument
+        - Command: npx create-react-app my-app --template typescript
+        - Start the app with npm start
+        - Differences in file extensions and tsconfig.json
+    - tsconfig.json configuration
+        - Key "lib" for browser environment type definitions
+        - Set allowJs to false for a pure TypeScript app
+    - ESlint configuration in .eslintrc
+        - Browser, ES6, and Jest environments
+        - Extended linting rules for React and TypeScript
+        - Disabling explicit-function-return-type, explicit-module-boundary-types, and react/react-in-jsx-scope rules
+    - Linting script for *.tsx files in package.json
+        - Alter the lint command to lint TypeScript files
+    - React components with TypeScript
+        - Example with prop-types
+        - Transition to TypeScript using interfaces
+        - Defining types for props and return types for components
+        - Type assertion for getElementById's return value to HTMLElement
+        - Ensuring type safety and avoiding type assertions
+    - Deeper type usage
+        - Handling course parts with different attributes
+        - Example array of course parts with additional attributes
+        - Introduction of the "kind" attribute for type distinction
+    - Defining types for different course part kinds
+        - CoursePartBasic:
+            - name: string
+            - exerciseCount: number
+            - description: string
+            - kind: "basic"
+        - CoursePartGroup:
+            - name: string
+            - exerciseCount: number
+            - groupProjectCount: number
+            - kind: "group"
+        - CoursePartBackground:
+            - name: string
+            - exerciseCount: number
+            - description: string
+            - backgroundMaterial: string
+            - kind: "background"
+    - Creating a union type of all course part types
+        - Type: CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground
+    - Updating the courseParts variable with "kind" attribute
+        - Adding "kind" attribute to each course part for type narrowing
+    - Type narrowing with switch case expressions
+        - TypeScript can infer specific types based on "kind" attribute
+        - Discriminated union technique
+    - Exhaustive type checking with assertNever function
+        - Helper function to handle unexpected values
+        - Usage in a default case to catch unexpected types
+        - Provides error messages for unhandled types
+    - React app with state
+        - Introduction of useState hook
+        - Inferring and specifying types for useState
+        - Typing notes with an interface
+    - Rendering notes and adding a form
+        - Rendering notes using map
+        - Handling form input and submitting new notes
+    - Communicating with the server
+        - Fetching initial state from a JSON server backend
+        - Using Axios to make HTTP requests
+        - Type parameter for Axios functions to ensure proper typing
+    - Refactoring and code cleanup
+        - Creating a separate types.ts file for type definitions
+        - Extracting server communication logic into a noteService module
+        - Cleaning up the App component by using the extracted logic
+    - A note about defining object types
+        - Discussion of using interfaces vs. type aliases for defining object types in TypeScript
+- E - Grande finale: Patientor
+    - When working with an existing codebase:
+        - Start by reading the README.md in the repository's root for project conventions and structure.
+        - Check the package.json if README is unavailable.
+        - Start the application and verify its functionality.
+        - Explore the folder structure to understand the application's organization.
+        - Look for TypeScript types (types.ts or similar).
+        - Review unit, integration, or end-to-end tests for code quality.
+    - Understanding TypeScript types:
+        - TypeScript provides types for data structures, functions, components, and state.
+        - VSCode can help identify types by highlighting variables and parameters.
+    - Code reading tips:
+        - Reading code is a skill; don't worry if you don't understand everything at first.
+        - Code may have many corner cases and complex logic.
+        - Think of it as a learning opportunity and growth experience.
+    - Patientor frontend:
+        - Start both the frontend and backend.
+        - Verify the patient listing page functionality.
+        - Explore the code in the src folder.
+        - Note the use of useState, Axios, Material UI, and React Router.
+    - Typing in React components:
+        - Ensure proper typing for props using interfaces.
+        - Example: interface Props { patients: Patient[], setPatients: React.Dispatch<React.SetStateAction<Patient[]>> }
+    - Extending entry types in Patientor:
+        - Create a BaseEntry interface with common fields.
+        - Define HealthCheckEntry, OccupationalHealthcareEntry, and HospitalEntry types.
+        - Combine types in a union to create the Entry type.
+    - Special Omit for unions:
+        - When using Omit with unions, common properties are retained.
+        - Define a special Omit-like function for unions to exclude properties.
+    - Submitting exercises:
+        - Submit exercises through the submissions system.
+        - Complete at least 24 exercises to pass this part.
+        - Download the certificate upon completion.

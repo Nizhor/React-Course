@@ -1,0 +1,119 @@
+- A - Login in frontend
+    - Past two parts focused on backend
+    - Frontend developed in part 2
+    - Frontend does not support user management implemented in backend part 4
+    - Current frontend functionality:
+        - Shows existing notes
+        - Lets users toggle note importance
+        - New notes cannot be added
+    - Backend changes from part 4:
+        - Expects a token verifying user identity with new note
+    - Implementing user management functionality in frontend
+    - Starting with user login
+    - Assumption: new users will not be added from frontend
+    - Added login form to top of page
+    - App component code provided
+    - Application doesn't display notes if not connected to backend
+    - Backend can be started using npm run dev from Part 4
+    - Frontend can be started with npm start
+    - Notes saved in MongoDB database from Part 4 should be visible
+    - Login form handled similarly to forms in part 2
+    - Application state fields for username and password
+    - Form fields have event handlers that synchronize state
+    - handleLogin method not yet implemented
+    - Login done by sending HTTP POST request to server address api/login
+    - Code separated into its own module for HTTP request
+    - Async/await syntax used
+    - handleLogin function handles form data
+    - On successful login:
+        - Form fields are emptied
+        - Server response saved to user field of app state
+    - On login failure:
+        - User is notified
+    - Render logic:
+        - Show login form if user not logged in
+        - Show form for adding notes if user is logged in
+    - Helper functions added for generating forms
+    - Conditional rendering used for forms
+    - Show user name on screen if logged in
+    - App component is large, refactoring suggested
+    - Current application code on GitHub branch part5-2
+    - Token returned with successful login saved to app state
+    - Backend changes for creating new notes:
+        - Add token of logged-in user to Authorization header of HTTP request
+    - Event handler for login sets token
+    - User login details lost on browser refresh
+    - Solution: save login details to local storage
+    - Local Storage is browser-based key-value database
+    - Saved values are DOMstrings
+    - Values parsed to and from JSON for local storage
+    - Application checks for user details on local storage on page entry
+    - User details found on local storage are saved to app state and noteService
+    - Effect hooks used for handling initial page load.
+    - Challenge with token-based authentication: Revoking API access.
+        - Solutions:
+            - Limit token validity, requiring user re-login.
+            - Use server-side session to track token validity.
+        - Risks with local storage:
+            - Vulnerable to Cross Site Scripting (XSS) attacks.
+            - React mitigates XSS by sanitizing rendered text.
+        - Alternative storage:
+            - Use httpOnly cookies to store tokens.
+            - Makes Single Page Applications (SPAs) more complex.
+            - httpOnly cookies may not be inherently safer than local storage.
+        - Key takeaway: Minimize XSS attack risks, regardless of storage method.
+- B - props.children and prop types
+    - props.children used to reference child components
+    - Automatically added by React
+    - Displaying the login form only when appropriate
+        - By default, show only a login button
+        - Show login form when user presses the login button
+        - User can close the form by pressing cancel
+    - Refactoring Login Form
+        - Extracted login form into LoginForm component
+        - All states and functions related to form are passed as props
+        - Direct assignment of props using destructuring for cleaner code
+    - Login Form Display Logic in App Component
+        - Introduced loginVisible state to toggle login form visibility
+        - Two buttons control visibility
+            - Login button to show form
+            - Cancel button to hide form
+        - Inline CSS toggles visibility using ternary operators
+    - props.children Explained
+        - Any React element between opening and closing tags of a component is considered a child
+        - Example with Togglable component
+        - Child components can be referenced using props.children
+    - Togglable Component
+        - Purpose: Toggle visibility of components
+        - Uses useState for visibility
+        - props.children used to render child components
+        - Automatically closing tags give empty props.children
+    - NoteForm Component
+        - Extracted form for creating notes into a new component
+        - Included inside Togglable component for toggling visibility
+        - State for the form moved to NoteForm component
+    - Lifting State Up
+        - React recommends moving shared state to closest common ancestor
+        - The state of the application is mainly in the App component
+    - ref in React
+        - Addresses need to hide form after note creation
+        - useRef used to create reference to component
+        - forwardRef and useImperativeHandle allow accessing component functions outside of the component
+        - noteFormRef.current.toggleVisibility hides form post note creation
+    - Takeaways
+        - useImperativeHandle allows external access to component functions
+        - It can alter the state of a component from outside
+        - React hooks can sometimes lead to messier code compared to class components
+        - Other use cases for refs exist beyond accessing components.
+    - PropTypes for type checking in React components
+    - Togglable component enforces buttonLabel prop as required string
+    - LoginForm component props type-checked using PropTypes
+    - ESLint for identifying/reporting patterns in JavaScript code
+    - Vite has ESLint installed by default
+    - Custom ESLint configuration using .eslintrc.cjs file
+    - Linting setup for React, JSX, and Jest
+    - .eslintignore file created to exclude specific directories from linting
+    - React component using forwardRef might not have a display name, causing warnings
+    - Fix by assigning a displayName to the component
+    - Reference to a GitHub repository at the end
+    - Mention of an exercise for readers to complete

@@ -1,0 +1,274 @@
+- A - React Router
+    - React Router
+        - Differences in exercises for this course section.
+        - Exercises related to chapter theory.
+        - Series of exercises to revise entire course content.
+        - Expansion of the Bloglist application from parts 4 and 5.
+    - Application Navigation Structure
+        - Post-part 6: Focus on React without Redux.
+        - Commonality of navigation bars in web apps.
+        - Switching views in the application.
+        - Traditional web apps vs. single-page apps:
+            - Traditional: HTTP GET request to change view.
+            - Single-page: JSON data fetches for view changes.
+        - Implementing a navigation bar in React.
+        - Sample React code for home, notes, and users views.
+    - React Router (Continuation)
+        - React Router library manages app navigation.
+        - Conversion of app to use React Router:
+            - Installation: **`npm install react-router-dom`**.
+            - Changes in the app structure.
+            - Usage of BrowserRouter (imported as Router).
+            - Use of Routes and Route components.
+    - Parameterized Route
+        - New views: Home, Notes, Users, Login, and single Note view.
+        - Notes display with clickable names using Link component.
+        - Parameterized URLs: "express style" with a colon.
+        - Use of **`useParams()`** to get URL parameters.
+        - Rendering a specific note.
+    - useNavigate
+        - Simple login functionality.
+        - Conditional rendering based on login status.
+        - Using **`useNavigate`** for programmatic URL changes.
+        - Use of **`useParams`** and **`useNavigate`** as hook functions.
+    - Redirect
+        - Conditional rendering for the Users route.
+        - Redirecting unauthenticated users to the login view using Navigate.
+        - Ideal handling: Hiding login-required links for unauthenticated users.
+        - Introduction of a footer common to modern web apps.
+    - Parameterized Route Revisited
+        - Flaw: Note component receives all notes but displays only one.
+- B - Custom hooks
+    - Custom hooks
+    - Hooks
+    - React provides 15 different built-in hooks
+        - Popular hooks: useState and useEffect
+    - Part 5 usage:
+        - useImperativeHandle hook
+            - Allows components to provide functions to others
+    - Part 6 usage:
+        - useReducer and useContext
+            - For Redux-like state management
+        - useSelector and useDispatch hooks from react-redux library
+            - Sharing redux-store and dispatch function
+    - React Router's API
+        - Partially hook-based
+        - Access URL parameters
+        - Manipulate browser URL programmatically
+    - Hooks characteristics from Part 1:
+        - Not normal functions
+        - Follow specific rules
+        - Cannot be called inside loops, conditions, or nested functions
+        - Call hooks from React function components or custom hooks
+    - ESlint rule available for correct hooks usage
+        - eslint-plugin-react-hooks in create-react-app
+    - Custom hooks in React:
+        - Facilitate reuse of component logic
+        - Extract component logic into reusable functions
+        - Adhere to rules of hooks
+        - Name starts with "use"
+    - Counter application example from Part 1
+        - Increment, decrement, or reset counter
+    - Extracting counter logic into a custom hook:
+        - useCounter hook definition
+        - useState for state creation
+        - Return value and manipulation functions
+    - Using useCounter in React components
+        - Extract App component state to useCounter
+        - Reuse in different components, like click trackers
+    - Dealing with forms in React
+        - Managing form fields and their states
+        - Register onChange handler for synchronization
+    - Custom useField hook:
+        - Simplify form state management
+        - Return input attributes: type, value, onChange
+    - Using spread attributes:
+        - Pass props to a component using spread syntax
+        - Examples of passing props in two different ways
+    - Simplified application example
+        - useField for each form field
+        - Encapsulate form state details in custom hook
+    - Benefits of custom hooks:
+        - Tool for code reuse
+        - Divide code into modular parts
+- C - More about styles
+    - Two different ways of adding styles: single CSS file and inline styles
+    - Ready-made UI libraries
+        - Bootstrap toolkit by Twitter
+        - Explosion of new UI frameworks
+        - UI frameworks provide ready-made themes and components
+        - React-friendly versions available
+    - React Bootstrap
+        - Installation and CSS stylesheet link
+        - Styling with Bootstrap's container class
+        - Stylish tables with built-in Table component
+        - Improving forms with Bootstrap forms
+        - Adding notifications with Bootstrap's Alert component
+        - Implementing navigation with Bootstrap's Navbar component
+    - Material UI
+        - Installation
+        - Styling with MaterialUI's Container
+        - Stylish tables with Material UI
+        - Improving forms with Material UI's TextField and Button components
+        - Adding notifications with Material UI's Alert component
+        - Implementing navigation with Material UI's AppBar component
+    - Closing thoughts on React Bootstrap vs. MaterialUI
+    - Other UI frameworks
+    - Styled components
+        - Installation
+        - Styling components with tagged template literals
+        - Styling application components with styled components
+- D - Webpack
+    
+    Webpack and React:
+    
+    - React faced initial tool configuration challenges.
+    - Create React App was made to simplify these configurations.
+    - Lately, Vite has gained popularity over Create React App for new projects.
+    - Both Vite and Create React App use bundlers.
+    - Create React App uses Webpack, a leading bundler for many years.
+    - New bundlers like esbuild, which Vite uses, are quicker, but they may lack certain functionalities.
+    - It's beneficial to learn about Webpack.
+    
+    Bundling:
+    
+    - Code in applications is split into various modules.
+    - Some older browsers can't read ES6 modules.
+    - Modules are bundled for compatibility.
+    - The bundling process combines multiple source code files into one.
+    - An example of deploying a React frontend is using the command `npm run build`.
+    - A bundled application has a specific structure with the primary file being `index.html`.
+    - The process also bundles the application's CSS files.
+    - Bundling starts at an entry point, typically `index.js`.
+    - Every piece of imported code is included when bundling.
+    - Bundling reduces loading overhead by combining files.
+    - The most recommended approach is bundling into a single file.
+    - You can set up webpack configurations for a React application by hand.
+    
+    Bundling React:
+    
+    - The transformation of applications to simpler React applications is possible.
+    - Necessary React libraries should be installed.
+    - Application files are modified for integration with React.
+    - A primary `index.html` page is required.
+    - For bundling JSX present in App.js, the right loader is essential.
+    - Loaders tell webpack how to process files before bundling.
+    - JSX code is then converted to standard JavaScript.
+    - The configuration of loaders is vital.
+    - The loader setup involves specific properties like test, loader, and options.
+    - React elements in bundled files are created with the createElement function.
+    - There can be async/await issues in certain browsers.
+    - The workaround is the installation and use of core-js and regenerator-runtime.
+    
+    Transpilers:
+    
+    - Transpiling means converting code from one JavaScript version to another.
+    - The provided configuration transpiles JSX to regular JavaScript.
+    - Babel is a commonly used tool for this purpose.
+    - Not all browsers support the latest ES6 and ES7 features.
+    - Typically, code is transpiled to the ES5 standard.
+    - Babel's process is directed using plugins.
+    - Most developers opt for pre-set plugins.
+    
+    Babel and Presets
+    
+    - Currently using @babel/preset-react to transpile application source code.
+    - Configuration:
+        - test: /.js$/
+        - loader: babel-loader
+        - options: presets: [@babel/preset-react]
+    - Added @babel/preset-env plugin to transpile to ES5 standard.
+    - Installed the preset: npm install @babel/preset-env --save-dev
+    - Transpiling converts code to traditional JavaScript, using variables declared with the var keyword and avoiding arrow functions.
+    
+    CSS Integration
+    
+    - Introduced CSS in a new src/index.css file using class .container.
+    - Applied style in the App component and imported the style in the index.js file.
+    - Transpilation fails without the presence of CSS and style loaders.
+    - Configuration set to include rules for .js and .css files.
+    - CSS loader processes CSS files, and Style loader inserts a style element containing the application styles into the DOM.
+    - CSS is bundled into main.js, so there is no need for a separate import in index.html.
+    - If desired, a separate CSS file can be generated using the mini-css-extract-plugin.
+    - Installed the necessary loaders: npm install style-loader css-loader --save-dev
+    
+    Webpack-dev-server
+    
+    - Enhances the development workflow.
+    - Installed using: npm install --save-dev webpack-dev-server
+    - Defined an npm script in package.json to start the development server.
+    - Included a new devServer property in webpack.config.js for configuration.
+    - The dev-server offers quick code update processes.
+    - The bundling result with dev-server is virtual and held in memory.
+    - Extended code to show a click counter and a button within the App component.
+    
+    Source Maps
+    
+    - Faced an error related to a function in handleClick.
+    - Due to bundling, the error location in the processed code didn't correlate with the original source code.
+    - Source maps were introduced to trace errors back to the actual source code.
+    - Integrated source-map into the devtool property in the configuration.
+    - With source maps, error messages became more accurate.
+    - Resolved the error by initializing state correctly.
+    
+    Minifying Code
+    
+    - Deployed applications leverage the main.js code bundle.
+    - The bundle includes the entire React library, leading to a significant file size.
+    - Minification is the process of optimizing JS files for size.
+    - From its fourth version, Webpack uses UglifyJS for minification.
+    - To enable minification, set webpack's mode to production in package.json.
+    
+    Development and Production Configuration
+    
+    - Integrated a backend into the application.
+    - When locally used, it points to the json-server on port 3001, but when bundled, it refers to a production URL.
+    - Utilized a custom hook named useNotes to fetch notes.
+    - Backend server's address was hardcoded into the application.
+    - Webpack's configuration function can discern between production and development modes.
+    - Implemented webpack's DefinePlugin to determine the global constant BACKEND_URL based on the running environme
+- E - Class components, Miscellaneous
+    - Class Components in React
+        - React components initially defined using JavaScript's class syntax.
+        - State in class components initialized in the constructor.
+        - Data fetching in class components done using lifecycle methods.
+        - Functional components with hooks now preferred.
+    - Organization of Code in React Application
+        - Components usually placed in the components directory.
+        - Reducers in the reducers directory.
+        - Server communication code in the services directory.
+    - Frontend and Backend in the Same Repository
+        - Frontend and backend created in separate repositories.
+        - Sometimes, entire application might be in a single repository.
+    - Changes on the Server
+        - Solutions for reflecting backend changes to frontend include polling and WebSockets.
+    - Virtual DOM
+        - React components return a set of React elements, forming the Virtual DOM.
+        - React computes the optimal way to update the real DOM when the state changes.
+    - Role of React in Applications
+        - React primarily manages creation of views.
+        - React's hook functions provide lightweight versions of Redux.
+    - React/Node Application Security
+        - Regularly check and apply security updates for libraries.
+        - Use npm audit to check security of dependencies.
+    - SQL Injections
+        - Malicious users can exploit SQL queries.
+        - Use parameterized queries for prevention.
+    - Cross-Site Scripting (XSS)
+        - Attack where malicious JavaScript code is injected into a web application.
+        - React sanitizes data to prevent execution of malicious code.
+    - Updating Dependencies
+        - Regularly update dependencies for security and compatibility.
+    - Broken Authentication and Access Control
+        - Token-based authentication is robust when used with HTTPS protocol.
+    - Typed Versions of JavaScript
+        - TypeScript is a popular statically typed version of JavaScript.
+    - Server-Side Rendering, Isomorphic Applications, and Universal Code
+        - React components can be rendered on the server.
+        - Next.js simplifies creating universal applications.
+    - Progressive Web Apps (PWAs)
+        - Web applications optimized for all platforms.
+    - Microservice Architecture
+        - Microservices break the backend into separate, independent services.
+        - Netflix and Amazon are notable adopters of microservice architectures.
+- F -  Exercises: extending the bloglist
