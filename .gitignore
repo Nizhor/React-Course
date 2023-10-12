@@ -1,11 +1,5 @@
 archive for now/
 node_modules/
-<<<<<<< HEAD
 *.json
 *.env
 ```
-=======
-
-
-```
->>>>>>> d12c9560e8f7d8f8c2c61f2c868224b9d3cd251f
